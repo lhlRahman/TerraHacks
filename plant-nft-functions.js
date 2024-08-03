@@ -846,7 +846,12 @@ export const getPlants = async () => {
                 };
 
                 // Create the properties array
-                all.push([{
+                all.push([
+                    {
+                        key: 'id',
+                        value: i
+                    }
+                    ,{
                         key: 'name',
                         value: findPropertyValue('name') || attributeMap['name']
                     },
