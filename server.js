@@ -20,8 +20,8 @@ const collection = 714;
 
 app.post('/postPlant', async (req, res) => {
     try {
-        const { imgURL, name, walletID, data } = req.body;
-        const result = await postPlant(imgURL, name, walletID, data);
+        const { data } = req.body;
+        const result = await postPlant(data.imgURL, data.name, data.walletID, data);
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -30,8 +30,8 @@ app.post('/postPlant', async (req, res) => {
 
 app.put('/putPlant', async (req, res) => {
     try {
-        const { id, imageURL, data } = req.body;
-        const result = await putPlant(id, imageURL, data);
+        const { id, data } = req.body;
+        const result = await putPlant(id, data.imageURL, data);
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });

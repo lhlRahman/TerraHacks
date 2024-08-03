@@ -198,19 +198,9 @@ const updatePlantNFT = async (collectionId, tokenId, newAttributes) => {
 
 const main = async () => {
     try {
-        // const collectionId = await createMutablePlantCollection();
-        const tokenId = await mintPlantNFT(714);
+        const collectionId = await createMutablePlantCollection();
+        const tokenId = await mintPlantNFT(collectionId);
 
-        // Example of updating attributes
-        const newAttributes = {
-            name: "Updated Plant Name",
-            colVibrancy: 75,
-            colVibrancyAdvice: "New vibrancy advice",
-            LAI: 60,
-            LAIAdvice: "New LAI advice"
-        };
-
-       const res =  await updatePlantNFT(714, tokenId, newAttributes);
         console.log(res);
     } catch (e) {
         console.log('Something went wrong during collection creation, NFT minting, or updating');
