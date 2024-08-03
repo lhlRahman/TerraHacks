@@ -967,6 +967,7 @@ export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID) =>
     const {
         sdk
     } = getSdk(fromWalletSeed);
+    
 
     try {
         const result = await sdk.token.transfer.submitWaitResult({

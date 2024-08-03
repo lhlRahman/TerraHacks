@@ -90,6 +90,31 @@ app.post('/sellPlant', async (req, res) => {
     }
 });
 
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+}
+);
+
+function makeRequest() {
+    https.get('https://terrahacks.onrender.com/health', (resp) => {
+        let data = '';
+
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        resp.on('end', () => {
+            console.log("sent request to myself");
+        });
+
+    }).on("error", (err) => {
+        console.log("Error: " + err.message);
+    });
+}
+
+// Request every 15 mins
+setInterval(makeRequest, 15 * 20 * 1000);
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
