@@ -1,7 +1,6 @@
 // server.js
 import express from 'express';
 import { config } from 'dotenv';
-import { mintRaceNFT, mintAchievementNFT, PINATA_GATEWAY, getSdk, getRacesByPlayer, getAchievementsByPlayer } from './nftFunctions.js';
 
 config();
 
@@ -20,11 +19,8 @@ app.post('/mint-nft', async (req, res) => {
             return res.status(400).json({ error: 'Player address is required' });
         }
 
-        const { account } = getSdk();
         console.log('Minting account:', account.address);
 
-        const mintResult = await mintRaceNFT(nftData);
-        res.json(mintResult);
 
     } catch (error) {
         console.error('Error minting NFT:', error);
@@ -43,9 +39,7 @@ app.post("/getinfo", async (req, res) => {
         if (!playerAddress) {
             return res.status(400).json({ error: 'Player address is required' });
         }
-        const races = await getRacesByPlayer(playerAddress);
 
-        res.json(races);
     } catch (error) {
         console.error('Error getting player info:', error);
         res.status(500).json({ error: 'Failed to get player info', details: error instanceof Error ? error.message : String(error) });
