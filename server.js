@@ -10,6 +10,7 @@ import {
     talkPlant,
     sellPlant
 } from './plant-nft-functions.js';
+import https from 'https'; 
 
 config();
 
