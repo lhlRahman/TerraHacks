@@ -1,51 +1,91 @@
 // server.js
 import express from 'express';
 import { config } from 'dotenv';
+import {
+    postPlant,
+    putPlant,
+    getPlant,
+    getPlantsUser,
+    getPlants,
+    talkPlant,
+    sellPlant
+} from './plant-nft-functions.js';
 
 config();
 
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3000;
+const collection = 714;
 
-app.post('/mint-nft', async (req, res) => {
+app.post('/postPlant', async (req, res) => {
     try {
-        const {
-            nftData,
-            playerAddress
-        } = req.body;
-
-        if (!playerAddress) {
-            return res.status(400).json({ error: 'Player address is required' });
-        }
-
-        console.log('Minting account:', account.address);
-
-
+        const { imgURL, name, walletID, data } = req.body;
+        const result = await postPlant(imgURL, name, walletID, data);
+        res.json(result);
     } catch (error) {
-        console.error('Error minting NFT:', error);
-        res.status(500).json({ 
-            error: 'Failed to mint NFT', 
-            details: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined
-        });
+        res.status(500).json({ error: error.message });
     }
 });
 
-
-app.post("/getinfo", async (req, res) => {
+app.put('/putPlant', async (req, res) => {
     try {
-        const { playerAddress } = req.body;
-        if (!playerAddress) {
-            return res.status(400).json({ error: 'Player address is required' });
-        }
-
+        const { id, imageURL, data } = req.body;
+        const result = await putPlant(id, imageURL, data);
+        res.json(result);
     } catch (error) {
-        console.error('Error getting player info:', error);
-        res.status(500).json({ error: 'Failed to get player info', details: error instanceof Error ? error.message : String(error) });
+        res.status(500).json({ error: error.message });
     }
 });
 
+app.get('/getPlant/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const plant = await getPlant(parseInt(id));
+        res.json(plant);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/getPlantsUser/:walletID', async (req, res) => {
+    try {
+        const { walletID } = req.params;
+        const plants = await getPlantsUser(walletID);
+        res.json(plants);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/getPlants', async (req, res) => {
+    try {
+        const plants = await getPlants();
+        res.json(plants);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/talkPlant', async (req, res) => {
+    try {
+        const { messages } = req.body;
+        const response = await talkPlant(messages);
+        res.json({ response });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/sellPlant', async (req, res) => {
+    try {
+        const { id, fromWalletID, fromWalletSeed, toWalletID } = req.body;
+        const result = await sellPlant(id, fromWalletID, fromWalletSeed, toWalletID);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
