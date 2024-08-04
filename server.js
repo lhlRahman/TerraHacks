@@ -82,8 +82,8 @@ app.post('/talkPlant', async (req, res) => {
 
 app.post('/sellPlant', async (req, res) => {
     try {
-        const { id, fromWalletID, fromWalletSeed, toWalletID } = req.body;
-        const result = await sellPlant(id, fromWalletID, fromWalletSeed, toWalletID);
+        const { id, fromWalletID, fromWalletSeed, toWalletID, toWalletSeed, price } = req.body;
+        const result = await sellPlant(id, fromWalletID, fromWalletSeed, toWalletID, toWalletSeed, price);
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });

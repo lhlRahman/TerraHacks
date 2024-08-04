@@ -1013,7 +1013,7 @@ export const talkPlant = async (messages) => {
     return data.choices[0].message.content;
 };
 
-export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID) => {
+export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID, toWalletSeed, price) => {
     const {
         sdk
     } = getSdk(fromWalletSeed);
@@ -1024,8 +1024,16 @@ export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID) =>
             from: fromWalletID,
             to: toWalletID,
             collectionId: COLLECTION_ID,
-            tokenId: id
+            tokenId: id,
         });
+    
+        const newsdk = getSdk(toWalletSeed)
+
+        const res = await newsdk.sdk.balance.transfer.submitWaitResult({
+            address: toWalletID,
+            destination: fromWalletID,
+            amount: price,
+        })
 
         return result.parsed;
     } catch (error) {
