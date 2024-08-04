@@ -17,7 +17,6 @@ config();
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3000;
-const collection = 714;
 
 app.post('/postPlant', async (req, res) => {
     try {

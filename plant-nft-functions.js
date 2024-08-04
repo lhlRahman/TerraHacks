@@ -9,14 +9,12 @@ import {
     config
 } from 'dotenv';
 import FormData from 'form-data';
-// import { generateImage } from './gpt.js';
 import fetch from 'node-fetch';
 import fs from 'fs';
-// import path from 'path';
 
 config();
 
-const COLLECTION_ID = 714;
+const COLLECTION_ID = 715;
 
 const PINATA_JWT = process.env.IPFS || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJmM2EwNTVhYS1hYmQ2LTRlZDYtOTU5Yy1iMGJkZmVjMDViMTMiLCJlbWFpbCI6ImxobHJhaG1hbkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiZmNkZDQ3ZjA0Y2M5MGY1YjhhMDEiLCJzY29wZWRLZXlTZWNyZXQiOiIwM2E4ZmM0NDNkYzJiMjNlNjVmOGU4MTllZTlkZTMyNjBjNmI3M2ZmNGFiYjBhM2M2MzAxNDBiZWUyYTY2ZWIxIiwiaWF0IjoxNzIyMDk2NjYwfQ.cQPYfszcpi57cvjHcjl3afVY8Lr3RNS4TvZpSGUVA9Q';
 export const PINATA_GATEWAY = process.env.IPFS_GATEWAY || 'https://aquamarine-rainy-kangaroo-939.mypinata.cloud';
@@ -59,8 +57,6 @@ export async function pinFileToIPFS(filePath) {
         throw error;
     }
 }
-
-
 
 const createMutablePlantCollection = async () => {
     const {
@@ -111,111 +107,125 @@ const createMutablePlantCollection = async () => {
             },
             4: {
                 name: {
+                    _: 'type'
+                },
+                type: 'string',
+                optional: false
+            },
+            5: {
+                name: {
                     _: 'colVibrancy'
                 },
                 type: 'number',
                 optional: false
             },
-            5: {
+            6: {
                 name: {
                     _: 'colVibrancyAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            6: {
+            7: {
                 name: {
                     _: 'LAI'
                 },
                 type: 'number',
                 optional: false
             },
-            7: {
+            8: {
                 name: {
                     _: 'LAIAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            8: {
+            9: {
                 name: {
                     _: 'wilting'
                 },
                 type: 'number',
                 optional: false
             },
-            9: {
+            10: {
                 name: {
                     _: 'wiltingAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            10: {
+            11: {
                 name: {
                     _: 'spotting'
                 },
                 type: 'number',
                 optional: false
             },
-            11: {
+            12: {
                 name: {
                     _: 'spottingAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            12: {
+            13: {
                 name: {
                     _: 'symmetry'
                 },
                 type: 'number',
                 optional: false
             },
-            13: {
+            14: {
                 name: {
                     _: 'symmetryAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            14: {
+            15: {
                 name: {
                     _: 'growthPat'
                 },
                 type: 'number',
                 optional: false
             },
-            15: {
+            16: {
                 name: {
                     _: 'growthPatAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            16: {
+            17: {
                 name: {
                     _: 'pests'
                 },
                 type: 'number',
                 optional: false
             },
-            17: {
+            18: {
                 name: {
                     _: 'pestsAdvice'
                 },
                 type: 'string',
                 optional: false
             },
-            18: {
+            19: {
                 name: {
                     _: 'flowering'
                 },
                 type: 'number',
                 optional: false
+            },
+            20: {
+                name: {
+                    _: "floweringAdvice"
+                },
+                type: 'string',
+                optional: false
             }
         }
-    };
+    }
 
     try {
         const result = await sdk.collection.create.submitWaitResult({
@@ -277,49 +287,55 @@ const mintPlantNFT = async (collectionId) => {
                         _: 'seed123'
                     },
                     4: {
-                        _: 50
+                        _: 'Plant Type'
                     },
                     5: {
-                        _: 'Vibrant color advice'
+                        _: 50
                     },
                     6: {
-                        _: 50
+                        _: 'Vibrant color advice'
                     },
                     7: {
-                        _: 'LAI advice'
+                        _: 50
                     },
                     8: {
-                        _: 50
+                        _: 'LAI advice'
                     },
                     9: {
-                        _: 'Wilting advice'
+                        _: 50
                     },
                     10: {
-                        _: 50
+                        _: 'Wilting advice'
                     },
                     11: {
-                        _: 'Spotting advice'
+                        _: 50
                     },
                     12: {
-                        _: 50
+                        _: 'Spotting advice'
                     },
                     13: {
-                        _: 'Symmetry advice'
+                        _: 50
                     },
                     14: {
-                        _: 50
+                        _: 'Symmetry advice'
                     },
                     15: {
-                        _: 'Growth pattern advice'
+                        _: 50
                     },
                     16: {
-                        _: 50
+                        _: 'Growth pattern advice'
                     },
                     17: {
-                        _: 'Pests advice'
+                        _: 50
                     },
                     18: {
+                        _: 'Pests advice'
+                    },
+                    19: {
                         _: 50
+                    },
+                    20: {
+                        _: 'Flowering advice'
                     }
                 }
             }
@@ -349,7 +365,7 @@ const updatePlantNFT = async (collectionId, tokenId, newAttributes) => {
     try {
         const properties = Object.entries(newAttributes).map(([key, value]) => ({
             key,
-            value: value.toString() // Convert all values to string
+            value: value.toString()
         }));
 
         const result = await sdk.token.setProperties.submitWaitResult({
@@ -415,49 +431,55 @@ export const postPlant = async (imgURL, name, walletID, plantData) => {
                             _: plantData.seed
                         },
                         4: {
-                            _: plantData.colVibrancy
+                            _: plantData.type
                         },
                         5: {
-                            _: plantData.colVibrancyAdvice
+                            _: plantData.colVibrancy
                         },
                         6: {
-                            _: plantData.LAI
+                            _: plantData.colVibrancyAdvice
                         },
                         7: {
-                            _: plantData.LAIAdvice
+                            _: plantData.LAI
                         },
                         8: {
-                            _: plantData.wilting
+                            _: plantData.LAIAdvice
                         },
                         9: {
-                            _: plantData.wiltingAdvice
+                            _: plantData.wilting
                         },
                         10: {
-                            _: plantData.spotting
+                            _: plantData.wiltingAdvice
                         },
                         11: {
-                            _: plantData.spottingAdvice
+                            _: plantData.spotting
                         },
                         12: {
-                            _: plantData.symmetry
+                            _: plantData.spottingAdvice
                         },
                         13: {
-                            _: plantData.symmetryAdvice
+                            _: plantData.symmetry
                         },
                         14: {
-                            _: plantData.growthPat
+                            _: plantData.symmetryAdvice
                         },
                         15: {
-                            _: plantData.growthPatAdvice
+                            _: plantData.growthPat
                         },
                         16: {
-                            _: plantData.pests
+                            _: plantData.growthPatAdvice
                         },
                         17: {
-                            _: plantData.pestsAdvice
+                            _: plantData.pests
                         },
                         18: {
+                            _: plantData.pestsAdvice
+                        },
+                        19: {
                             _: plantData.flowering
+                        },
+                        20: {
+                            _: plantData.floweringAdvice
                         }
                     }
                 }
@@ -472,16 +494,13 @@ export const postPlant = async (imgURL, name, walletID, plantData) => {
     }
 };
 
-
 export const putPlant = async (id, plantData) => {
     const {
         sdk,
         account
     } = getSdk(plantData.seed);
 
-
     try {
-        // Prepare all properties, including the image URL
         const properties = [{
                 key: 'name',
                 value: plantData.name
@@ -497,6 +516,10 @@ export const putPlant = async (id, plantData) => {
             {
                 key: 'seed',
                 value: plantData.seed
+            },
+            {
+                key: 'type',
+                value: plantData.type
             },
             {
                 key: 'colVibrancy',
@@ -557,6 +580,10 @@ export const putPlant = async (id, plantData) => {
             {
                 key: 'flowering',
                 value: plantData.flowering.toString()
+            },
+            {
+                key: 'floweringAdvice',
+                value: plantData.floweringAdvice
             }
         ];
 
@@ -606,6 +633,10 @@ export const putPlant = async (id, plantData) => {
             {
                 key: 'seed',
                 value: findPropertyValue('seed') || attributeMap['seed']
+            },
+            {
+                key: 'type',
+                value: findPropertyValue('type') || attributeMap['type']
             },
             {
                 key: 'colVibrancy',
@@ -666,6 +697,10 @@ export const putPlant = async (id, plantData) => {
             {
                 key: 'flowering',
                 value: (findPropertyValue('flowering') || attributeMap['flowering']).toString()
+            },
+            {
+                key: 'floweringAdvice',
+                value: findPropertyValue('floweringAdvice') || attributeMap['floweringAdvice']
             }
         ];
 
@@ -720,6 +755,10 @@ export const getPlant = async (id) => {
                 value: findPropertyValue('seed') || attributeMap['seed']
             },
             {
+                key: 'type',
+                value: findPropertyValue('type') || attributeMap['type']
+            },
+            {
                 key: 'colVibrancy',
                 value: (findPropertyValue('colVibrancy') || attributeMap['colVibrancy']).toString()
             },
@@ -778,6 +817,10 @@ export const getPlant = async (id) => {
             {
                 key: 'flowering',
                 value: (findPropertyValue('flowering') || attributeMap['flowering']).toString()
+            },
+            {
+                key: 'floweringAdvice',
+                value: findPropertyValue('floweringAdvice') || attributeMap['floweringAdvice']
             }
         ];
 
@@ -846,12 +889,11 @@ export const getPlants = async () => {
                 };
 
                 // Create the properties array
-                all.push([
-                    {
+                all.push([{
                         key: 'id',
                         value: i
-                    }
-                    ,{
+                    },
+                    {
                         key: 'name',
                         value: findPropertyValue('name') || attributeMap['name']
                     },
@@ -866,6 +908,10 @@ export const getPlants = async () => {
                     {
                         key: 'seed',
                         value: findPropertyValue('seed') || attributeMap['seed']
+                    },
+                    {
+                        key: 'type',
+                        value: findPropertyValue('type') || attributeMap['type']
                     },
                     {
                         key: 'colVibrancy',
@@ -926,6 +972,10 @@ export const getPlants = async () => {
                     {
                         key: 'flowering',
                         value: (findPropertyValue('flowering') || attributeMap['flowering']).toString()
+                    },
+                    {
+                        key: 'floweringAdvice',
+                        value: findPropertyValue('floweringAdvice') || attributeMap['floweringAdvice']
                     }
                 ])
             } catch (error) {
@@ -967,7 +1017,6 @@ export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID) =>
     const {
         sdk
     } = getSdk(fromWalletSeed);
-    
 
     try {
         const result = await sdk.token.transfer.submitWaitResult({
@@ -984,3 +1033,4 @@ export const sellPlant = async (id, fromWalletID, fromWalletSeed, toWalletID) =>
         throw error;
     }
 };
+
