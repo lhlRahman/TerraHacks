@@ -14,7 +14,7 @@ import fs from 'fs';
 
 config();
 
-const COLLECTION_ID = 715;
+const COLLECTION_ID = 716;
 
 const PINATA_JWT = process.env.IPFS || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJmM2EwNTVhYS1hYmQ2LTRlZDYtOTU5Yy1iMGJkZmVjMDViMTMiLCJlbWFpbCI6ImxobHJhaG1hbkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiZmNkZDQ3ZjA0Y2M5MGY1YjhhMDEiLCJzY29wZWRLZXlTZWNyZXQiOiIwM2E4ZmM0NDNkYzJiMjNlNjVmOGU4MTllZTlkZTMyNjBjNmI3M2ZmNGFiYjBhM2M2MzAxNDBiZWUyYTY2ZWIxIiwiaWF0IjoxNzIyMDk2NjYwfQ.cQPYfszcpi57cvjHcjl3afVY8Lr3RNS4TvZpSGUVA9Q';
 export const PINATA_GATEWAY = process.env.IPFS_GATEWAY || 'https://aquamarine-rainy-kangaroo-939.mypinata.cloud';
@@ -389,7 +389,7 @@ const updatePlantNFT = async (collectionId, tokenId, newAttributes) => {
 const main = async () => {
     try {
         const collectionId = await createMutablePlantCollection();
-        const tokenId = await mintPlantNFT(collectionId);
+        //const tokenId = await mintPlantNFT(collectionId);
 
         console.log(res);
     } catch (e) {
